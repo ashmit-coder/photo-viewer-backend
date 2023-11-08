@@ -107,14 +107,23 @@ app.post('/admin/login',(req,res)=>{
     res.redirect('/login');
 });
 
-app.get("/api/image",async(req,res)=>{
+app.get("/api/image/:id",async(req,res)=>{
     if(req.isUnauthenticated()){
         return res.status(403).json({success:false,message:"Access denied"});
     }
 
-    
-     let dat = await data.LookAtImages();
-     return res.status(200).sendFile(path.join(__dirname,dat.path));
+
+    if(req.params.id!=undefined){
+        let dat= await data.LookAtImage(req.params.id);
+        if(dat) return res.status(200).sendFile(path.join(__dirname,dat.path));
+        else{
+        return res.status(400).json({success:false,message:"Wrong url"});
+            
+        }
+    }   
+    else{
+        return res.status(400).json({success:false,message:"Wrong url"});
+    }
 });
 
 app.post("/api/logout",async(req,res)=>{

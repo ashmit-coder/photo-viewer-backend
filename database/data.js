@@ -14,6 +14,17 @@ async function LookAtImages(){
     let a = parseInt((Math.random())*data.length);
     return data[a];
 }
+async function LookAtImage(index){
+    try{
+        let data = await Images.find();
+        let a = parseInt(index);
+        return data[a];
+
+    }
+    catch(err){
+        return null;
+    }
+}
 
 async function addImages(fileName){
     let data = new Images({"path":`public/images/${fileName}`,rating:4});
@@ -22,5 +33,6 @@ async function addImages(fileName){
 
 module.exports = {
     addImages,
-    LookAtImages
+    LookAtImages,
+    LookAtImage
 };
