@@ -1,4 +1,4 @@
-FROM node:18.15.0
+FROM node:latest
 ENV NODE_ENV=production
 ENV SECRET="ashmit shubham"
 WORKDIR /usr/src/app
