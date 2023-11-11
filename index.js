@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+app.set('trust proxy', 1)
+app.get('/ip', (request, response) => response.send(request.ip))
+
 const morgan  = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -50,7 +53,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors());
 app.use(upload.array());
-app.use(helmet());
+app.use(helmet({
+    crossOriginResourcePolicy:{policy:"cross-origin"}
+}));
 app.use(limiter);
 
 
