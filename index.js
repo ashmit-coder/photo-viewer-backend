@@ -146,6 +146,12 @@ app.post("/api/logout",async(req,res)=>{
     })
 });
 
+app.get('/api/isAuth',async(req,res)=>{
+    if(req.isAuthenticated()){
+        return res.status(200).json({success:true,message:req.sessionID});
+    }
+    return res.status(401).json({message:undefined,success:false});
+})
 app.listen(PORT,()=>{
 console.log(`Listening to port ${PORT}....`);
 }); 
