@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 app.set('trust proxy', 2)
-app.get('/ip', (request, response) => response.send(request.ip))
+// app.get('/ip', (request, response) => response.send(request.ip))
 
 const morgan  = require('morgan');
 const cors = require('cors');
