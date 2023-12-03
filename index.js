@@ -55,8 +55,13 @@ const PORT = process.env.PORT || 5000;
 // middleware to check for logins
 async function isLoggedIn(req, res, next){
     let {token} = req.query;
-    let result = await client.get(token)
-    console.log("sheesh "+result);
+    if(token){
+        let result = await client.get(token)
+    }
+    else{
+        return res.status(403).redirect('/api/login');
+    }
+    
     if(result==='false'){
         return res.status(403).redirect('/api/login');
     }
